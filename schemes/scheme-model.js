@@ -42,11 +42,25 @@ const remove = id => {
     .del();
 };
 
+const addStep = (step, scheme_id) => {
+  let post = { ...step, scheme_id };
+  console.log("========", post);
+
+  return db("steps")
+    .insert(post)
+    .then(() => {
+      return db("steps")
+        .where(post.scheme_id)
+        .first();
+    });
+};
+
 module.exports = {
   find,
   findById,
   add,
   update,
   remove,
-  findSteps
+  findSteps,
+  addStep
 };
