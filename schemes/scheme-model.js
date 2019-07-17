@@ -14,6 +14,15 @@ function findById(id) {
   }
 }
 
+function findSteps(scheme_id) {
+  if (scheme_id) {
+    return db("steps as s")
+      .join("schemes as sc", "s.scheme_id", "sc.id")
+      .select("sc.scheme_name", "s.instructions", "s.step_number")
+      .where({ scheme_id });
+  }
+}
+
 const add = scheme => {
   return db("schemes")
     .insert(scheme)
@@ -38,5 +47,6 @@ module.exports = {
   findById,
   add,
   update,
-  remove
+  remove,
+  findSteps
 };
