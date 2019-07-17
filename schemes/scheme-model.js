@@ -14,17 +14,17 @@ function findById(id) {
   }
 }
 
-const add = car => {
+const add = scheme => {
   return db("schemes")
-    .insert(car)
-    .then(id => get(...id).first());
+    .insert(scheme)
+    .then(id => findById(...id).first());
 };
 
-const update = (id, car) => {
+const update = (scheme, id) => {
   return db("schemes")
     .where({ id })
-    .update(car)
-    .then(() => get(id));
+    .update(scheme)
+    .then(() => findById(id));
 };
 
 const remove = id => {
